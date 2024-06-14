@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 export default function Overview() {
   return (
     <div className="lg:w-2/3 mt-32 text-center mx-auto">
@@ -9,14 +11,14 @@ export default function Overview() {
         in our regenerative future.
       </p>
       <div className="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
-        <a
-          href="#"
-          className="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-md before:bg-black before:transition before:duration-300 active:duration-75 active:before:scale-95 sm:w-max"
+        <Link
+          to="/buy"
+          className="relative flex h-16 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-md before:bg-black before:transition before:duration-300 active:duration-75 active:before:scale-95 sm:w-max"
         >
           <span className="relative font-mono text-base font-semibold text-white">
             Are you ready to change the game?
           </span>
-        </a>
+        </Link>
       </div>
     </div>
   );
