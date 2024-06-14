@@ -2,7 +2,7 @@ export const contract = {
   _format: "hh-sol-artifact-1",
   contractName: "IndexToken",
   sourceName: "contracts/IndexToken.sol",
-  address: "0x69FDb37f13eB936ab9337922c06E7aD40D64B6c5",
+  address: "0x52ca43cBC9c3e0cc431380bE428aED5FC529A8f4",
   abi: [
     {
       anonymous: false,
