@@ -2,11 +2,43 @@ import useForm from "../hooks/useForm";
 import { useReadContract, useWriteContract } from "wagmi";
 import { contract } from "../abis/indexToken";
 import { useUi } from "../main";
+import { useEffect, useState } from "react";
 
 type RegisterProps = {
   contractAddress: `0x${string}`;
   remove: boolean;
 };
+
+function useGetContracts(addresses: string[]) {
+  const [contracts, setContracts] = useState<any>(null);
+
+  async function getToken(address: string) {
+    console.log({ address });
+    const res = await fetch(
+      `https://explorer.celo.org/alfajores/api?module=contract&action=getabi&address=${address}`
+    );
+    const json = await res.json();
+    console.log({ json });
+    if (json.result) {
+      const abi = JSON.parse(json.result);
+      return { abi };
+    }
+  }
+
+  async function getTokens() {
+    const promises = addresses.map(getToken);
+    const contracts = await Promise.all(promises);
+    setContracts(contracts);
+  }
+
+  useEffect(() => {
+    if (addresses.length > 0) {
+      getTokens();
+    }
+  }, [addresses]);
+
+  return { contracts };
+}
 
 export default function Register() {
   const { showNotification } = useUi();
@@ -19,6 +51,10 @@ export default function Register() {
     address: contract.address as any,
     functionName: "getAllTokens",
   });
+
+  const { contracts } = useGetContracts(tokens || []);
+
+  console.log({ contracts });
 
   const { writeContract, isPending } = useWriteContract();
 
